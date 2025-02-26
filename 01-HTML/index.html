@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link href="./style.css" rel="stylesheet" />
     <title>The basic data.</title>
   </head>
   <body>
-    <header>
+    <header class="main-header">
       <h1>📘 The Code Magazine</h1>
       <nav>
         <a href="./blog.html">Blog</a>
@@ -13,22 +14,27 @@
         <a href="#">Flex Box</a>
         <a href="#">CSS Grid</a>
       </nav>
+      <!-- <p>Test paragrapgh</p> -->
     </header>
     <article>
-      <h2>The Basic Language of the Web: HTML</h2>
-      <img
-        src="./images/laura-jones.jpg"
-        width="50"
-        height="50"
-        alt="Headshot of Laura Jones"
-      />
-      <p>Posted by <strong>Laura Jones</strong> on Monday, June 21st 2027</p>
-      <img
-        src="./images/post-img.jpg"
-        width="500"
-        height="200"
-        alt="HTML Code on a Screen"
-      />
+      <header class="post-header">
+        <h2>The Basic Language of the Web: HTML</h2>
+        <img
+          src="./images/laura-jones.jpg"
+          width="50"
+          height="50"
+          alt="Headshot of Laura Jones"
+        />
+        <p id="author">
+          Posted by <strong>Laura Jones</strong> on Monday, June 21st 2027
+        </p>
+        <img
+          src="./images/post-img.jpg"
+          width="500"
+          height="200"
+          alt="HTML Code on a Screen"
+        />
+      </header>
       <p>
         All modern websites and web applications are built using three
         fundamental
@@ -54,7 +60,7 @@
       </p>
       <p>In HTML, each element is made up of 3 parts:</p>
       <ol>
-        <li>The opening tag</li>
+        <li class="first-li">The opening tag</li>
         <li>The closing tag</li>
         <li>The actual element</li>
       </ol>
@@ -70,7 +76,9 @@
         web. Here are 5 of them:
       </p>
       <ul>
-        <li>To be able to use the fundamental web dev language</li>
+        <li class="first-li">
+          To be able to use the fundamental web dev language
+        </li>
         <li>
           To hand-craft beautiful websites instead of relying on tools like
           Worpress or Wix
@@ -82,15 +90,15 @@
       <p>Hopefully you learned something new here. See you next time!</p>
     </article>
     <aside>
-      <h3>Related Posts</h3>
-      <ul>
+      <h4>Related Posts</h4>
+      <ul class="related">
         <li>
           <img src="./images/related-1.jpg" width="75" height="75" /><a
             href="https://developer.mozilla.org/en-US/docs/Learn_web_development"
             target="_blank"
             >How to Learn Web Development</a
           >
-          <p>By Name Surname</p>
+          <p class="related-author">By Name Surname</p>
         </li>
         <li>
           <img src="./images/related-2.jpg" width="75" height="75" /><a
@@ -98,7 +106,7 @@
             target="_blank"
             >The Unknown Power of CSS</a
           >
-          <p>By Name Surname</p>
+          <p class="related-author">By Name Surname</p>
         </li>
         <li>
           <img src="./images/related-3.jpg" width="75" height="75" />
@@ -107,10 +115,10 @@
             target="_blank"
             >Why JavaScript is Awesome</a
           >
-          <p>By Name Surname</p>
+          <p class="related-author">By Name Surname</p>
         </li>
       </ul>
     </aside>
-    <footer>Copyright &copy; 2025 by The Magazine</footer>
+    <footer><p id="copyright">Copyright &copy; 2025 by The Magazine</p></footer>
   </body>
 </html>
