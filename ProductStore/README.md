@@ -26,25 +26,30 @@ To run the project locally, follow these steps:
    git clone https://github.com/SHREY190/ProductStore.git
 
 2. **Navigate to the project folder:**
+   ```bash
    cd ProductStore
    
 3. **Install backend dependencies:**
+   ```bash
    npm install
    
 4. **Start the server:**
+   ```bash
    npm run start
    
 5. **Navigate to the frontend folder and install dependencies:**
+   ```bash
    cd frontend
    npm install
    
 6. **Start the frontend server:**
+   ```bash
    npm run dev
 
 ## The backend server will be running on http://localhost:5000, and the frontend will be running on http://localhost:3000 by default.
 
 
-TODO:
+## TODO:
 1. Implement Owner-only Access for adding and editing products (authentication and authorization).
 
 2. Restrict Add Product, Delete Product and Edit Product functionality to the store owner.
