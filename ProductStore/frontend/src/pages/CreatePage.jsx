@@ -5,8 +5,6 @@ import {
   Heading,
   Input,
   VStack,
-  position,
-  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
@@ -43,8 +41,8 @@ const CreatePage = () => {
 
   const handleAddProduct = async () => {
     const { success, message } = await createProducts(newProduct);
-    console.log("Success", success);
-    console.log("Message", message);
+    // console.log("Success", success);
+    // console.log("Message", message);
     if (success) {
       setNewProduct({
         name: "",
@@ -57,7 +55,6 @@ const CreatePage = () => {
         status: "success",
         duration: 3000,
         isClosable: true,
-        position: "top-right",
       });
     } else {
       toast({
@@ -66,7 +63,6 @@ const CreatePage = () => {
         status: "error",
         duration: 3000,
         isClosable: true,
-        position: "top-right",
       });
     }
   };

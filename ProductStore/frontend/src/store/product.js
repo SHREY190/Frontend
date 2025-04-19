@@ -22,9 +22,6 @@ export const useProductStore = create((set) => ({
   fetchProducts: async () => {
     const res = await fetch("/api/products", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
     const response = await res.json();
     set({ products: response.data });
@@ -33,9 +30,6 @@ export const useProductStore = create((set) => ({
   deleteProducts: async (pid) => {
     const res = await fetch(`/api/products/${pid}`, {
       method: "DELETE",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
     });
     const response = await res.json();
     if (!response.success) {
@@ -46,6 +40,36 @@ export const useProductStore = create((set) => ({
     set((state) => ({
       products: state.products.filter((product) => product._id !== pid),
     }));
+    return { success: true, message: response.message };
+  },
+  updateProducts: async (pid, updatedProduct) => {
+    if (
+      !updatedProduct.name ||
+      !updatedProduct.price ||
+      !updatedProduct.image
+    ) {
+      return { success: false, message: "Please fill in all fields." };
+    }
+
+    const res = await fetch(`/api/products/${pid}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedProduct),
+    });
+
+    const response = await res.json();
+    if (!response.success) {
+      return { success: response.success, message: response.message };
+    }
+    // Update the ui imideatly without needing a refresh
+    set((state) => ({
+      products: state.products.map((product) =>
+        product._id === pid ? response.data : product
+      ),
+    }));
+
     return { success: true, message: response.message };
   },
 }));
