@@ -5,17 +5,18 @@ import { useProductStore } from "../store/product";
 import ProductCard from "../components/ProductCard";
 
 const HomePage = () => {
+  // Destructure fetchProducts and products from the product store
   const { fetchProducts, products } = useProductStore();
 
+  // Fetch all products on component mount
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
 
-  // console.log("Products", products);
-
   return (
     <Container maxW={"container.xl"} py={12}>
       <VStack spacing={8}>
+        {/* Title section */}
         <Text
           fontSize={30}
           fontWeight={"bold"}
@@ -26,20 +27,24 @@ const HomePage = () => {
         >
           Current Products
         </Text>
+
+        {/* Grid layout for displaying product cards */}
         <SimpleGrid
           columns={{
-            base: 1,
-            md: 2,
-            lg: 3,
+            base: 1, // 1 column on small screens
+            md: 2, // 2 columns on medium screens
+            lg: 3, // 3 columns on large screens
           }}
           spacing={10}
           w={"full"}
         >
+          {/* Render a ProductCard for each product */}
           {products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </SimpleGrid>
 
+        {/* If no products are available, show a message with a link to create one */}
         {products.length === 0 && (
           <Text
             fontSize={"xl"}

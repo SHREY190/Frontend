@@ -12,16 +12,23 @@ import { useProductStore } from "../store/product";
 import { useToast } from "@chakra-ui/react";
 
 const CreatePage = () => {
+  // Local state to hold new product input fields
   const [newProduct, setNewProduct] = useState({
     name: "",
     price: "",
     image: "",
   });
+
+  // Button disabled state, initially true
   const [isDisabled, setIsDisabled] = useState(true);
 
+  // Access the createProducts function from Zustand store
   const { createProducts } = useProductStore();
+
+  // Toast hook for showing success/error messages
   const toast = useToast();
 
+  // Enable/disable the submit button based on input validity
   useEffect(() => {
     if (
       newProduct.name.length > 0 &&
@@ -32,18 +39,19 @@ const CreatePage = () => {
     } else {
       setIsDisabled(true);
     }
-    // console.log("newProduct", newProduct);
   }, [newProduct]);
 
+  // Update local state when input fields change
   const handleChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
+  // Handle adding the new product
   const handleAddProduct = async () => {
     const { success, message } = await createProducts(newProduct);
-    // console.log("Success", success);
-    // console.log("Message", message);
+
     if (success) {
+      // Clear form fields on success
       setNewProduct({
         name: "",
         price: "",
@@ -70,9 +78,12 @@ const CreatePage = () => {
   return (
     <Container maxW={"container.sm"}>
       <VStack spacing={8}>
+        {/* Page heading */}
         <Heading as={"h1"} size={"2xl"} textAlign={"center"} mb={8}>
           Create New Product
         </Heading>
+
+        {/* Form container */}
         <Box
           w={"full"}
           bg={useColorModeValue("white", "gray.800")}
@@ -81,6 +92,7 @@ const CreatePage = () => {
           shadow={"md"}
         >
           <VStack spacing={4}>
+            {/* Input fields for product details */}
             <Input
               placeholder="Product Name"
               name="name"
@@ -100,6 +112,7 @@ const CreatePage = () => {
               onChange={handleChange}
             />
 
+            {/* Add Product button */}
             <Button
               colorScheme="blue"
               w={"full"}
