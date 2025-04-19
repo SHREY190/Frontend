@@ -39,7 +39,8 @@ To run the project locally, follow these steps:
    
 6. Start the frontend server:
    npm run dev
-The backend server will be running on http://localhost:5000, and the frontend will be running on http://localhost:3000 by default.
+
+##The backend server will be running on http://localhost:5000, and the frontend will be running on http://localhost:3000 by default.
 
 
 TODO:
