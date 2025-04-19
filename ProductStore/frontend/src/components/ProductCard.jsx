@@ -24,40 +24,38 @@ import React, { useEffect, useState } from "react";
 import { useProductStore } from "../store/product";
 
 const ProductCard = ({ product }) => {
+  // Chakra UI hook to manage color modes
   const textColor = useColorModeValue("gray.600", "gray.200");
   const bg = useColorModeValue("white", "gray.800");
+
+  // Functions from the product store to delete and update products
   const { deleteProducts, updateProducts } = useProductStore();
-  const [isDisabled, setIsDisabled] = useState(true);
+
+  // Chakra UI hook to show toast notifications
   const toast = useToast();
+
+  // Chakra UI hook to control modal visibility
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  // State to hold the updated product values
   const [updatedProduct, setUpdatedProduct] = useState({
     name: product.name,
     price: product.price,
     image: product.image,
   });
 
-  useEffect(() => {
-    if (
-      updatedProduct.name.length > 0 &&
-      updatedProduct.price.length > 0 &&
-      updatedProduct.image.length > 0
-    ) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
-    // console.log("product", product);
-  }, [updatedProduct]);
-
+  // Handle changes to the input fields in the modal
   const handleChange = (e) => {
     setUpdatedProduct({ ...updatedProduct, [e.target.name]: e.target.value });
   };
 
+  // Update product using data from the modal
   const handleUpdateProduct = async (pid, updatedProduct) => {
     const { success, message } = await updateProducts(pid, updatedProduct);
     // console.log("Success", success);
     // console.log("Message", message);
     onClose();
+
     if (success) {
       setUpdatedProduct({
         name: "",
@@ -82,6 +80,7 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  // Delete a product by ID
   const handleDelete = async (pid) => {
     const { success, message } = await deleteProducts(pid);
     if (success) {
@@ -102,6 +101,7 @@ const ProductCard = ({ product }) => {
       });
     }
   };
+
   return (
     <Box
       shadow={"lg"}
@@ -111,6 +111,7 @@ const ProductCard = ({ product }) => {
       _hover={{ transform: "translateY(-5px)", shadow: "xl" }}
       bg={bg}
     >
+      {/* Product image */}
       <Image
         src={product.image}
         alt={product.name}
@@ -118,6 +119,8 @@ const ProductCard = ({ product }) => {
         w={"full"}
         objectFit={"cover"}
       />
+
+      {/* Product details */}
       <Box p={4}>
         <Heading as="h3" size="md" mb={2}>
           {product.name}
@@ -125,6 +128,8 @@ const ProductCard = ({ product }) => {
         <Text fontWeight={"bold"} fontSize={"xl"} color={textColor} mb={4}>
           ${product.price}
         </Text>
+
+        {/* Edit and Delete buttons */}
         <HStack spacing={2}>
           <IconButton
             icon={<EditIcon />}
@@ -138,6 +143,8 @@ const ProductCard = ({ product }) => {
           ></IconButton>
         </HStack>
       </Box>
+
+      {/* Modal for updating product details */}
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
